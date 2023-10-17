@@ -1,0 +1,20 @@
+<%= render partial: 'header'%>
+<%= form_with model:@letter do  |f|%>
+  <div class="container">
+    <div class="row justify-content-center">
+      <main>
+        <div class="py-5 col-8 ">
+          <div class="mb-3">
+            <%= f.label 'Formule su Pregunta : ', class: 'form-label'%>
+            <%= f.text_area :question, class: 'form-control' %>
+          </div>
+          <div class="mb-3">
+            <%= f.label 'Coloque aqui la Respuesta : ', class: 'form-label'%>
+            <%= f.text_area :response, class: 'form-control' %>
+            <%= f.submit "Crear", class: "btn btn-primary  mt-3" %>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+<% end %>

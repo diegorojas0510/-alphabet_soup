@@ -1,0 +1,26 @@
+<%= render partial: 'header'%>
+
+<div class="container py-4">
+  <div class="p-5 mb-4 bg-light rounded-3">
+    <table class="table table-bordered border-primary">
+      <tbody>
+      <%@matrix.each do | matrix | %>
+        <tr>
+          <%matrix.each do | letter | %>
+            <td class = "letter", align = "center">
+              <%=letter %>
+            </td>
+          <% end %>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class=" p-4 ps-md-0 words">
+    <h5 class="mt-0">Completa las frases con las palabras encontradas en la sopa de letras.</h5>
+      <%@letters.each do |letter| %>
+        <li id = <%= letter.response %> >
+          <%= letter.question %></li>
+      <% end %>
+  </div>
+</div>
