@@ -1,8 +1,10 @@
+// función para buscar un letra
 function searchLetter(){
     let lettres = document.querySelectorAll('.selected');
     lettres.forEach(function(letter){
         letter.style.backgroundColor = "#6c99dc";
         letter.classList.remove('selected');
+        // puedo validar si la letra se esta seleccionando bien
         console.log('Clic en una letra');
     })
 
@@ -38,56 +40,50 @@ function phrases(secret_word) {
 }
 
 
-function alphabetSoup(){
-    let phrase = [];
+// Declara un arreglo para almacenar las palabras completadas.
+let completedWords = [];
 
-    document.querySelectorAll('.letter').forEach(function(letter){
-        letter.addEventListener('click', function(){
-            console.log('Clic en una letra');
+function alphabetSoup() {
+    document.querySelectorAll('.letter').forEach(function (letter) {
+        letter.addEventListener('click', function () {
+            if (completedWords.includes(letter.innerText)) {
+                // La palabra ya ha sido completada, no hagas nada.
+                return;
+            }
 
             letter.classList.toggle('selected');
             letter.style.backgroundColor = "#D7BDE2";
-            let letra = letter.innerText.split('');
-            phrase.push(letra);
-            let secret_word = phrase.join('');
 
-            console.log('Secret Word:', secret_word);
+            let selectedLetters = document.querySelectorAll('.selected');
+            let selectedWord = "";
 
+            // Construye la palabra seleccionada a partir de las letras seleccionadas.
+            selectedLetters.forEach(function (selectedLetter) {
+                selectedWord += selectedLetter.innerText;
+            });
 
-            if(secret_word === 'VARIABLES'){
-                searchLetter(phrase);
-                phrases(secret_word);
+            console.log('Secret Word:', selectedWord);
+
+            if (selectedWord === 'VARIABLES' ||
+                selectedWord === 'OBJETO' ||
+                selectedWord === 'ENCAPSULAMIENTO' ||
+                selectedWord === 'VISIBILIDAD' ||
+                selectedWord === 'ABSTRACCION' ||
+                selectedWord === 'INSTANCIA') {
+                searchLetter(selectedWord);
+                phrases(selectedWord);
+
+                // Si la palabra se completa, agrégala al arreglo de palabras completadas y cámbiale el color.
+                if (!completedWords.includes(selectedWord)) {
+                    completedWords.push(selectedWord);
+                    document.querySelectorAll('.selected').forEach(function (selectedLetter) {
+                        selectedLetter.style.backgroundColor = "lightgreen";
+                    });
+                }
             }
-
-            if(secret_word === 'OBJETO'){
-                searchLetter(phrase);
-                phrases(secret_word);
-            }
-
-            if(secret_word === 'ENCAPSULAMIENTO'){
-                searchLetter(phrase);
-                phrases(secret_word);
-            }
-
-            if(secret_word === 'VISIBILIDAD'){
-                searchLetter(phrase);
-                phrases(secret_word);
-            }
-
-            if(secret_word === 'ABSTRACCION'){
-                searchLetter(phrase);
-                phrases(secret_word);
-            }
-
-            if(secret_word === 'INSTANCIA'){
-                searchLetter(phrase);
-                phrases(secret_word);
-            }
-
-        })
-    })
+        });
+    });
 }
-
 
 
 
