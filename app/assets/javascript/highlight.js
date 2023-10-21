@@ -1,15 +1,30 @@
+function getRandomColor() {
+    const r = Math.floor(Math.random() * 256); // Valor aleatorio para el canal rojo (0-255)
+    const g = Math.floor(Math.random() * 256); // Valor aleatorio para el canal verde (0-255)
+    const b = Math.floor(Math.random() * 256); // Valor aleatorio para el canal azul (0-255)
+
+    return `rgb(${r}, ${g}, ${b})`;
+};
+
+const randomColor = getRandomColor();
+console.log(randomColor); // Muestra un color aleatorio en la consola
+
+
 // función para buscar un letra
 function searchLetter(){
+    // con el selected buscamos la letra que se selecciono
     let lettres = document.querySelectorAll('.selected');
     lettres.forEach(function(letter){
-        letter.style.backgroundColor = "#6c99dc";
+        // para cada elemento de la clase selected cambiamos el color de la letra a azul
+        letter.style.backgroundColor = getRandomColor();
+        // para cada elemento de la clase selected eliminamos la clase selected
         letter.classList.remove('selected');
         // puedo validar si la letra se esta seleccionando bien
         console.log('Clic en una letra');
     })
 
-    phrase = [];
-}
+    //phrase = [];
+};
 
 function phrases(secret_word) {
     const response = document.querySelector("#ABSTRACCION");
@@ -73,7 +88,7 @@ function alphabetSoup() {
                 searchLetter(selectedWord);
                 phrases(selectedWord);
 
-                // Si la palabra se completa, agrégala al arreglo de palabras completadas y cámbiale el color.
+                // condición para saber si la palabra ya fue completada y si es así cambiarle el color
                 if (!completedWords.includes(selectedWord)) {
                     completedWords.push(selectedWord);
                     document.querySelectorAll('.selected').forEach(function (selectedLetter) {

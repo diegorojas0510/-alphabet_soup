@@ -1,10 +1,10 @@
-#logica del programa
-class GenerateLetter
+ class GenerateLetter
 
   # generar una matriz de 16x16
   def generate
     matrix = Array.new(16) { Array.new(16) }
-    alphabet = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
+    # se crea un rango de la a A la Z y se convierte en un array
+    alphabet = ('A'..'Z').to_a
     array = []
 
     phrase =  Letter.all
@@ -13,13 +13,13 @@ class GenerateLetter
       array.push(word.response)
     end
 
+    # se crea un rango de 0 a 15 en i y j y se llena con una letra aleatoria del array
     (0..15).each do |i|
       (0..15).each do |j|
         matrix[i][j] = alphabet[rand(26)]
         # puts "Hola [#{i}][#{j}] - #{matrix[i][j]}"
       end
     end
-
 
     completeWord(array, matrix)
 
@@ -40,7 +40,7 @@ class GenerateLetter
         end
       elsif  i == 2
         word[i].length.times do |j|
-          matriz[j][j] = word[i][j]
+          matriz[i][j] = word[i][j]
         end
       elsif  i == 3
         word[i].length.times do |j|
